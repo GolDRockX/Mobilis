@@ -30,23 +30,27 @@ const broadcastPrice = () => {
 
 setInterval(broadcastPrice, 10000);
 
-// Fetches price via Binance's public REST API (works even where the Binance
-// WebSocket is region-blocked with 451 errors). Polls every 10s.
+// Fetches price via CoinGecko's public API — no key required, no region blocking
+// (Binance blocks many server regions including the US, so we use CoinGecko instead).
+// Polls every 10s.
 const fetchPriceFromBinance = async () => {
   try {
-    const res = await fetch('https://api.binance.com/api/v3/ticker/24hr?symbol=BTCUSDT');
-    if (!res.ok) throw new Error(`Binance API returned ${res.status}`);
+    const res = await fetch(
+      'https://api.coingecko.com/api/v3/coins/bitcoin?localization=false&tickers=false&market_data=true&community_data=false&developer_data=false'
+    );
+    if (!res.ok) throw new Error(`CoinGecko API returned ${res.status}`);
     const d = await res.json();
+    const md = d.market_data;
     lastPrice = {
-      price: parseFloat(d.lastPrice),
-      change: parseFloat(d.priceChangePercent),
-      high: parseFloat(d.highPrice),
-      low: parseFloat(d.lowPrice),
-      volume: parseFloat(d.volume),
+      price: md.current_price.usd,
+      change: md.price_change_percentage_24h,
+      high: md.high_24h.usd,
+      low: md.low_24h.usd,
+      volume: md.total_volume.usd,
       timestamp: Date.now()
     };
   } catch (err) {
-    console.error('Failed to fetch BTC price from Binance REST API:', err.message);
+    console.error('Failed to fetch BTC price from CoinGecko API:', err.message);
   }
 };
 

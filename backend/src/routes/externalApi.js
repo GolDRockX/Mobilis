@@ -61,20 +61,23 @@ router.get('/wallet', async (req, res) => {
 
 /**
  * GET /api/v1/btc-price
- * Returns the latest BTC price from Binance
+ * Returns the latest BTC price from CoinGecko
  */
 router.get('/btc-price', async (req, res) => {
   try {
-    const response = await fetch('https://api.binance.com/api/v3/ticker/24hr?symbol=BTCUSDT');
+    const response = await fetch(
+      'https://api.coingecko.com/api/v3/coins/bitcoin?localization=false&tickers=false&market_data=true&community_data=false&developer_data=false'
+    );
     const data = await response.json();
+    const md = data.market_data;
     res.json({
       success: true,
       data: {
-        price: parseFloat(data.lastPrice),
-        change_24h: parseFloat(data.priceChangePercent),
-        high_24h: parseFloat(data.highPrice),
-        low_24h: parseFloat(data.lowPrice),
-        volume_24h: parseFloat(data.volume),
+        price: md.current_price.usd,
+        change_24h: md.price_change_percentage_24h,
+        high_24h: md.high_24h.usd,
+        low_24h: md.low_24h.usd,
+        volume_24h: md.total_volume.usd,
         timestamp: new Date().toISOString()
       }
     });
