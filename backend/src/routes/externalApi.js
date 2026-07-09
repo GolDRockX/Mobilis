@@ -61,28 +61,52 @@ router.get('/wallet', async (req, res) => {
 
 /**
  * GET /api/v1/btc-price
- * Returns the latest BTC price from CoinGecko
+ * Returns the latest BTC price (Kraken primary, CoinGecko fallback)
  */
 router.get('/btc-price', async (req, res) => {
   try {
-    const response = await fetch(
-      'https://api.coingecko.com/api/v3/coins/bitcoin?localization=false&tickers=false&market_data=true&community_data=false&developer_data=false'
-    );
-    const data = await response.json();
-    const md = data.market_data;
-    res.json({
+    const krakenRes = await fetch('https://api.kraken.com/0/public/Ticker?pair=XBTUSD');
+    if (!krakenRes.ok) throw new Error('Kraken unavailable');
+    const kd = await krakenRes.json();
+    if (kd.error?.length) throw new Error('Kraken error');
+    const t = kd.result[Object.keys(kd.result)[0]];
+    const price = parseFloat(t.c[0]);
+    const open = parseFloat(t.o);
+    return res.json({
       success: true,
       data: {
-        price: md.current_price.usd,
-        change_24h: md.price_change_percentage_24h,
-        high_24h: md.high_24h.usd,
-        low_24h: md.low_24h.usd,
-        volume_24h: md.total_volume.usd,
-        timestamp: new Date().toISOString()
+        price,
+        change_24h: ((price - open) / open) * 100,
+        high_24h: parseFloat(t.h[1]),
+        low_24h: parseFloat(t.l[1]),
+        volume_24h: parseFloat(t.v[1]),
+        timestamp: new Date().toISOString(),
+        source: 'kraken'
       }
     });
-  } catch (err) {
-    res.status(500).json({ success: false, message: 'Failed to fetch BTC price' });
+  } catch {
+    try {
+      const response = await fetch(
+        'https://api.coingecko.com/api/v3/coins/bitcoin?localization=false&tickers=false&market_data=true&community_data=false&developer_data=false',
+        { headers: { 'User-Agent': 'Mozilla/5.0 (compatible; MobilisApp/1.0)' } }
+      );
+      const data = await response.json();
+      const md = data.market_data;
+      res.json({
+        success: true,
+        data: {
+          price: md.current_price.usd,
+          change_24h: md.price_change_percentage_24h,
+          high_24h: md.high_24h.usd,
+          low_24h: md.low_24h.usd,
+          volume_24h: md.total_volume.usd,
+          timestamp: new Date().toISOString(),
+          source: 'coingecko'
+        }
+      });
+    } catch (err) {
+      res.status(500).json({ success: false, message: 'Failed to fetch BTC price from all sources' });
+    }
   }
 });
 

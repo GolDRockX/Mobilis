@@ -30,37 +30,61 @@ const broadcastPrice = () => {
 
 setInterval(broadcastPrice, 10000);
 
-// Fetches price via CoinGecko's public API — no key required, no region blocking
-// (Binance blocks many server regions including the US, so we use CoinGecko instead).
-// Polls every 30s to stay well within CoinGecko's free-tier rate limits.
+// Fetches BTC price with a fallback chain: Kraken (primary, generous free limits)
+// → CoinGecko (backup). This protects against any single provider's rate limits
+// or regional blocks, which is common on shared-IP free hosting platforms.
+// Polls every 30s.
+
+const fetchFromKraken = async () => {
+  const res = await fetch('https://api.kraken.com/0/public/Ticker?pair=XBTUSD');
+  if (!res.ok) throw new Error(`Kraken API returned ${res.status}`);
+  const d = await res.json();
+  if (d.error?.length) throw new Error(`Kraken error: ${d.error.join(', ')}`);
+  const t = d.result[Object.keys(d.result)[0]];
+  const price = parseFloat(t.c[0]);
+  const open = parseFloat(t.o);
+  return {
+    price,
+    change: ((price - open) / open) * 100,
+    high: parseFloat(t.h[1]),
+    low: parseFloat(t.l[1]),
+    volume: parseFloat(t.v[1]),
+    timestamp: Date.now()
+  };
+};
+
+const fetchFromCoinGecko = async () => {
+  const res = await fetch(
+    'https://api.coingecko.com/api/v3/coins/bitcoin?localization=false&tickers=false&market_data=true&community_data=false&developer_data=false',
+    { headers: { 'User-Agent': 'Mozilla/5.0 (compatible; MobilisApp/1.0)', 'Accept': 'application/json' } }
+  );
+  if (!res.ok) throw new Error(`CoinGecko API returned ${res.status}`);
+  const d = await res.json();
+  const md = d.market_data;
+  return {
+    price: md.current_price.usd,
+    change: md.price_change_percentage_24h,
+    high: md.high_24h.usd,
+    low: md.low_24h.usd,
+    volume: md.total_volume.usd,
+    timestamp: Date.now()
+  };
+};
+
 const fetchPriceFromBinance = async () => {
   try {
-    const res = await fetch(
-      'https://api.coingecko.com/api/v3/coins/bitcoin?localization=false&tickers=false&market_data=true&community_data=false&developer_data=false',
-      { headers: { 'User-Agent': 'Mozilla/5.0 (compatible; MobilisApp/1.0)', 'Accept': 'application/json' } }
-    );
-    if (res.status === 429) {
-      // Rate limited — keep serving the last known price, try again next interval
-      console.warn('CoinGecko rate limit hit (429) — keeping last known price');
-      return;
+    lastPrice = await fetchFromKraken();
+  } catch (krakenErr) {
+    console.warn('Kraken price fetch failed, trying CoinGecko:', krakenErr.message);
+    try {
+      lastPrice = await fetchFromCoinGecko();
+    } catch (geckoErr) {
+      console.error('All price sources failed — keeping last known price. CoinGecko error:', geckoErr.message);
     }
-    if (!res.ok) throw new Error(`CoinGecko API returned ${res.status}`);
-    const d = await res.json();
-    const md = d.market_data;
-    lastPrice = {
-      price: md.current_price.usd,
-      change: md.price_change_percentage_24h,
-      high: md.high_24h.usd,
-      low: md.low_24h.usd,
-      volume: md.total_volume.usd,
-      timestamp: Date.now()
-    };
-  } catch (err) {
-    console.error('Failed to fetch BTC price from CoinGecko API:', err.message);
   }
 };
 
-// Fetch immediately on startup, then every 30 seconds (rate-limit friendly)
+// Fetch immediately on startup, then every 30 seconds
 fetchPriceFromBinance();
 setInterval(fetchPriceFromBinance, 30000);
 
