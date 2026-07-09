@@ -32,12 +32,18 @@ setInterval(broadcastPrice, 10000);
 
 // Fetches price via CoinGecko's public API — no key required, no region blocking
 // (Binance blocks many server regions including the US, so we use CoinGecko instead).
-// Polls every 10s.
+// Polls every 30s to stay well within CoinGecko's free-tier rate limits.
 const fetchPriceFromBinance = async () => {
   try {
     const res = await fetch(
-      'https://api.coingecko.com/api/v3/coins/bitcoin?localization=false&tickers=false&market_data=true&community_data=false&developer_data=false'
+      'https://api.coingecko.com/api/v3/coins/bitcoin?localization=false&tickers=false&market_data=true&community_data=false&developer_data=false',
+      { headers: { 'User-Agent': 'Mozilla/5.0 (compatible; MobilisApp/1.0)', 'Accept': 'application/json' } }
     );
+    if (res.status === 429) {
+      // Rate limited — keep serving the last known price, try again next interval
+      console.warn('CoinGecko rate limit hit (429) — keeping last known price');
+      return;
+    }
     if (!res.ok) throw new Error(`CoinGecko API returned ${res.status}`);
     const d = await res.json();
     const md = d.market_data;
@@ -54,9 +60,9 @@ const fetchPriceFromBinance = async () => {
   }
 };
 
-// Fetch immediately on startup, then every 10 seconds
+// Fetch immediately on startup, then every 30 seconds (rate-limit friendly)
 fetchPriceFromBinance();
-setInterval(fetchPriceFromBinance, 10000);
+setInterval(fetchPriceFromBinance, 30000);
 
 wss.on('connection', (ws) => {
   if (lastPrice) ws.send(JSON.stringify({ type: 'PRICE_UPDATE', data: lastPrice }));
