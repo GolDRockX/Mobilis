@@ -30,24 +30,29 @@ const broadcastPrice = () => {
 
 setInterval(broadcastPrice, 10000);
 
-const connectBinance = () => {
-  const binanceWs = new WebSocket('wss://stream.binance.com:9443/ws/btcusdt@ticker');
-  binanceWs.on('message', (data) => {
-    const parsed = JSON.parse(data);
+// Fetches price via Binance's public REST API (works even where the Binance
+// WebSocket is region-blocked with 451 errors). Polls every 10s.
+const fetchPriceFromBinance = async () => {
+  try {
+    const res = await fetch('https://api.binance.com/api/v3/ticker/24hr?symbol=BTCUSDT');
+    if (!res.ok) throw new Error(`Binance API returned ${res.status}`);
+    const d = await res.json();
     lastPrice = {
-      price: parseFloat(parsed.c),
-      change: parseFloat(parsed.P),
-      high: parseFloat(parsed.h),
-      low: parseFloat(parsed.l),
-      volume: parseFloat(parsed.v),
+      price: parseFloat(d.lastPrice),
+      change: parseFloat(d.priceChangePercent),
+      high: parseFloat(d.highPrice),
+      low: parseFloat(d.lowPrice),
+      volume: parseFloat(d.volume),
       timestamp: Date.now()
     };
-  });
-  binanceWs.on('close', () => setTimeout(connectBinance, 5000));
-  binanceWs.on('error', (err) => { console.error('Binance WS error:', err.message); binanceWs.terminate(); });
+  } catch (err) {
+    console.error('Failed to fetch BTC price from Binance REST API:', err.message);
+  }
 };
 
-connectBinance();
+// Fetch immediately on startup, then every 10 seconds
+fetchPriceFromBinance();
+setInterval(fetchPriceFromBinance, 10000);
 
 wss.on('connection', (ws) => {
   if (lastPrice) ws.send(JSON.stringify({ type: 'PRICE_UPDATE', data: lastPrice }));
