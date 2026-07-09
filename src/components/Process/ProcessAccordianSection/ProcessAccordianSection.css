@@ -1,0 +1,179 @@
+@import url('https://fonts.cdnfonts.com/css/satoshi');
+
+.process-accordion {
+    max-width: 1200px;
+    margin: auto;
+    margin-top: 30px;
+    margin-bottom: 80px;
+    font-family: "Satoshi", sans-serif;
+}
+
+.accordion-item {
+    border-bottom: 1px solid #7ac6a6;
+    padding: 22px 0;
+    transition: all 0.3s ease;
+}
+
+.accordion-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    cursor: pointer;
+    max-width: 1050px;
+    margin: auto;
+}
+
+.accordion-left {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.accordion-number {
+    font-size: 14px;
+    color: #00a94f;
+    font-weight: 600;
+}
+
+.accordion-header h3 {
+    font-size: 32px;
+    font-weight: 500;
+    color: #0055b8;
+    margin: 0;
+    letter-spacing: 1px;
+}
+
+.accordion-icon {
+    width: 32px;
+    height: 32px;
+    border: 1px solid #7ac6a6;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #00a94f;
+    font-size: 14px;
+    transition: all 0.3s ease;
+}
+
+/* Active State */
+
+.accordion-item.active {
+    background: linear-gradient(135deg,
+            #3d78b7,
+            #5f9bd3);
+    padding: 60px 25px;
+    border-radius: 12px;
+    border: none;
+    color: #fff;
+}
+
+.accordion-item.active .accordion-header h3,
+.accordion-item.active .accordion-number {
+    color: #fff;
+}
+
+.accordion-item.active .accordion-icon {
+    background: #fff;
+    color: #00a94f;
+}
+
+.accordion-content {
+    max-height: 0;
+    overflow: hidden;
+    transition: all 0.4s ease;
+}
+
+.accordion-content.open {
+    max-width: 1050px;
+    margin: auto;
+    margin-top: 18px;
+    max-height: 500px;
+}
+
+.accordion-content p {
+    font-size: 18px;
+    line-height: 1.7;
+    margin: 0;
+
+}
+
+/* Mobile: max-width 767px */
+@media (max-width: 767px) {
+    .process-accordion {
+        margin: 20px 16px 60px;
+    }
+
+    .accordion-item {
+        padding: 18px 0;
+    }
+
+    .accordion-header {
+        align-items: flex-start;
+        gap: 12px;
+        max-width: 100%;
+    }
+
+    .accordion-left {
+        gap: 10px;
+    }
+
+    .accordion-number {
+        font-size: 12px;
+    }
+
+    .accordion-header h3 {
+        font-size: 20px;
+    }
+
+    .accordion-icon {
+        width: 28px;
+        height: 28px;
+        font-size: 12px;
+    }
+
+    .accordion-item.active {
+        padding: 40px 15px;
+    }
+
+    .accordion-content p {
+        font-size: 14px;
+    }
+}
+
+/* Tablet: 768px - 1024px */
+@media (min-width: 768px) and (max-width: 1024px) {
+    .process-accordion {
+        margin: 30px 20px 70px;
+    }
+
+    .accordion-item {
+        padding: 20px 0;
+    }
+
+    .accordion-header {
+        gap: 15px;
+    }
+
+    .accordion-number {
+        font-size: 13px;
+    }
+
+    .accordion-header h3 {
+        font-size: 26px;
+    }
+
+    .accordion-icon {
+        width: 30px;
+        height: 30px;
+        font-size: 13px;
+    }
+
+    .accordion-item.active {
+        padding: 50px 20px;
+    }
+
+    .accordion-content p {
+        font-size: 16px;
+    }
+}

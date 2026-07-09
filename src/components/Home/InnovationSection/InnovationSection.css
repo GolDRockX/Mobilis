@@ -1,0 +1,192 @@
+@import url('https://fonts.cdnfonts.com/css/dm-sans');
+@import url('https://fonts.cdnfonts.com/css/satoshi');
+
+.innovation {
+    padding: 120px 120px;
+    max-width: 1400px;
+    margin: auto;
+}
+
+.innovation-inner {
+    display: grid;
+    grid-template-columns: 1.1fr 0.9fr;
+    gap: 80px;
+    align-items: start;
+}
+
+/* TITLE */
+.innovation-title {
+    font-family: 'Satoshi', sans-serif;
+    font-size: 48px;
+    line-height: 64px;
+    font-weight: 500;
+    margin-bottom: 60px;
+}
+
+.green {
+    color: #00A94F;
+}
+
+.blue {
+    color: #0055B8;
+}
+
+/* CARDS GRID */
+.innovation-cards {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 26px;
+}
+
+/* CARD */
+.feature-card {
+    background: #f3f3f3;
+    padding: 28px;
+    border-radius: 20px;
+    transition: all 0.25s ease;
+    cursor: pointer;
+}
+
+.feature-card h4 {
+    font-family: 'Satoshi', sans-serif;
+    font-size: 16px;
+    margin-bottom: 12px;
+    color: #000;
+    transition: color 0.25s ease;
+    padding-right: 70px;
+}
+
+.feature-card p {
+    font-family: 'Satoshi', sans-serif;
+    font-size: 14px;
+    color: rgba(0, 0, 0, 0.63);
+    line-height: 24px;
+    transition: color 0.25s ease;
+    padding-left: 60px;
+}
+
+/* HOVER EFFECT */
+.feature-card:hover {
+    background: #00A94F;
+}
+
+.feature-card:hover h4,
+.feature-card:hover p {
+    color: white;
+}
+
+/* RIGHT SIDE */
+.innovation-text {
+    max-width: 360px;
+    margin-bottom: 40px;
+    line-height: 26px;
+    font-family: 'Satoshi', sans-serif;
+    font-size: 14px;
+    color: rgba(0, 0, 0, 0.63);
+}
+
+.innovation-image {
+    margin-top: 80px;
+}
+
+.innovation-image img {
+    width: 100%;
+    border-radius: 28px;
+    display: block;
+}
+
+@media (max-width: 767px) {
+
+  .innovation {
+    padding: 60px 20px;
+  }
+
+  .innovation-inner {
+    grid-template-columns: 1fr;
+    gap: 40px;
+  }
+
+  .innovation-title {
+    font-size: 28px;
+    line-height: 38px;
+    margin-bottom: 30px;
+  }
+
+  /* Cards become single column */
+  .innovation-cards {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+
+  .feature-card {
+    padding: 20px;
+  }
+
+  .feature-card h4 {
+    font-size: 15px;
+    padding-right: 0;
+  }
+
+  .feature-card p {
+    font-size: 13px;
+    padding-left: 0;
+    line-height: 22px;
+  }
+
+  .innovation-text {
+    max-width: 100%;
+    font-size: 13px;
+    line-height: 22px;
+  }
+
+  .innovation-image {
+    margin-top: 30px;
+  }
+
+  .innovation-image img {
+    border-radius: 20px;
+  }
+}
+
+@media (min-width: 768px) and (max-width: 1024px) {
+
+  .innovation {
+    padding: 80px 40px;
+  }
+
+  .innovation-inner {
+    grid-template-columns: 1fr;
+    gap: 60px;
+  }
+
+  .innovation-title {
+    font-size: 36px;
+    line-height: 48px;
+    margin-bottom: 40px;
+  }
+
+  .innovation-cards {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 24px;
+  }
+
+  .feature-card {
+    padding: 24px;
+  }
+
+  .feature-card h4 {
+    padding-right: 20px;
+  }
+
+  .feature-card p {
+    padding-left: 0;
+  }
+
+  .innovation-text {
+    max-width: 100%;
+  }
+
+  .innovation-image {
+    margin-top: 40px;
+  }
+}

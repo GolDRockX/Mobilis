@@ -1,0 +1,43 @@
+.admin-toolbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 16px;
+}
+
+.admin-table th, .admin-table td { white-space: nowrap; }
+.admin-table { padding: 0; }
+
+.admin-inline-input {
+  background: var(--bg-primary);
+  border: 1px solid var(--border-accent);
+  border-radius: 6px;
+  padding: 5px 8px;
+  color: var(--text-primary);
+  font-size: 13px;
+  width: 120px;
+}
+.admin-inline-input:focus { outline: none; border-color: var(--accent); }
+
+.admin-actions { display: flex; gap: 6px; }
+
+.admin-btn {
+  width: 28px; height: 28px;
+  border-radius: 6px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.15s;
+}
+.admin-btn.edit { background: rgba(99,102,241,0.15); color: #818cf8; }
+.admin-btn.edit:hover { background: rgba(99,102,241,0.3); }
+.admin-btn.delete { background: var(--red-dim); color: var(--red); }
+.admin-btn.delete:hover { background: rgba(239,68,68,0.25); }
+.admin-btn.save { background: var(--green-dim); color: var(--green); }
+.admin-btn.save:hover { background: rgba(34,197,94,0.25); }
+.admin-btn.cancel { background: rgba(148,163,184,0.1); color: var(--text-secondary); }
+.admin-btn.cancel:hover { background: rgba(148,163,184,0.2); }
+
+@media (max-width: 767px) {
+  .admin-toolbar { flex-direction: column; align-items: flex-start; gap: 10px; }
+}

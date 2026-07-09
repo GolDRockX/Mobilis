@@ -1,0 +1,15 @@
+.video-section {
+    max-width: 1450px;
+    margin: 0 auto;
+}
+
+.video-hero {
+    width: 100%;
+}
+
+@media (max-width: 767px) {
+    .video-hero {
+        padding-left: 20px;
+        padding-right: 20px;
+    }
+}

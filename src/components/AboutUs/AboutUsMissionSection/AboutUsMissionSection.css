@@ -1,0 +1,269 @@
+@import url('https://fonts.cdnfonts.com/css/satoshi');
+
+.mission-section {
+    font-family: 'Satoshi', sans-serif;
+    max-width: 1050px;
+    margin: auto;
+    margin-top: 50px;
+}
+
+.mission-container {
+    width: 100%;
+}
+
+/* Header */
+.mission-header {
+    position: relative;
+    margin-bottom: 60px;
+}
+
+.mission-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 18px;
+    border: 1px solid #0055B8;
+    border-radius: 50px;
+    font-size: 14px;
+    color: #0055B8;
+    background: #fff;
+    margin-bottom: 20px;
+}
+
+.mission-badge .dot {
+    width: 8px;
+    height: 8px;
+    background: #00A94F;
+    border-radius: 50%;
+}
+
+.mission-header h1 {
+    font-size: 48px;
+    font-weight: 600;
+    color: #666;
+    line-height: 1.2;
+    max-width: 700px;
+}
+
+.process-btn {
+    position: absolute;
+    right: 0;
+    top: 40px;
+    background: #00A94F;
+    color: #fff;
+    border: none;
+    padding: 14px 26px;
+    border-radius: 40px;
+    font-size: 15px;
+    cursor: pointer;
+    display: inline-flex;
+    /* better for anchor */
+    align-items: center;
+    gap: 10px;
+    transition: 0.3s ease;
+    text-decoration: none;
+    /* remove underline */
+}
+
+
+.about-mission-arrow {
+    background: #fff;
+    color: #00A94F;
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 14px;
+}
+
+/* Cards */
+.mission-cards {
+    display: flex;
+    gap: 30px;
+}
+
+.card {
+    flex: 1;
+    border-radius: 24px;
+    padding: 60px 50px;
+    position: relative;
+}
+
+/* Vision Card */
+.vision-card {
+    background: #0EA44B;
+    color: #fff;
+}
+
+.vision-card h2,
+.vision-card p {
+    color: #fff;
+}
+
+/* Mission Card */
+.mission-card {
+    background: #e6e6e6;
+    color: #555;
+}
+
+/* Number Circle */
+.card-number {
+    position: absolute;
+    top: 30px;
+    left: 30px;
+    width: 60px;
+    height: 60px;
+    border: 1px solid currentColor;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 16px;
+}
+
+/* Text */
+.card h2 {
+    font-size: 32px;
+    margin-top: 80px;
+    margin-bottom: 20px;
+    font-weight: 600;
+}
+
+.card p {
+    font-size: 15px;
+    line-height: 1.7;
+    max-width: 420px;
+}
+
+/* Mobile: max-width 767px */
+@media (max-width: 767px) {
+    .mission-section {
+        margin-top: 30px;
+        padding: 0 20px;
+    }
+
+    .mission-header {
+        margin-bottom: 40px;
+        text-align: center;
+    }
+
+    .mission-badge {
+        font-size: 12px;
+        padding: 6px 14px;
+        margin-bottom: 16px;
+        justify-content: center;
+    }
+
+    .mission-header h1 {
+        font-size: 28px;
+        max-width: 100%;
+    }
+
+    .process-btn {
+        position: static;
+        margin-top: 20px;
+        font-size: 14px;
+        padding: 10px 18px;
+    }
+
+    .about-mission-arrow {
+        width: 24px;
+        height: 24px;
+        font-size: 12px;
+    }
+
+    .mission-cards {
+        flex-direction: column;
+        gap: 20px;
+    }
+
+    .card {
+        padding: 40px 20px;
+        margin-top: 20px;
+    }
+
+    .card-number {
+        width: 50px;
+        height: 50px;
+        font-size: 14px;
+        top: 20px;
+        left: 20px;
+    }
+
+    .card h2 {
+        font-size: 24px;
+        margin-top: 60px;
+        margin-bottom: 16px;
+    }
+
+    .card p {
+        font-size: 14px;
+        max-width: 100%;
+        line-height: 1.5;
+    }
+}
+
+/* Tablet: 768px - 1024px */
+@media (min-width: 768px) and (max-width: 1024px) {
+    .mission-section {
+        margin-top: 40px;
+        padding: 0 30px;
+    }
+
+    .mission-header {
+        margin-bottom: 50px;
+    }
+
+    .mission-badge {
+        font-size: 13px;
+        padding: 7px 16px;
+    }
+
+    .mission-header h1 {
+        font-size: 36px;
+        max-width: 100%;
+    }
+
+    .process-btn {
+        font-size: 14px;
+        padding: 12px 22px;
+    }
+
+    .about-mission-arrow {
+        width: 26px;
+        height: 26px;
+        font-size: 13px;
+    }
+
+    .mission-cards {
+        flex-direction: row;
+        gap: 20px;
+        flex-wrap: wrap;
+    }
+
+    .card {
+        padding: 50px 30px;
+    }
+
+    .card-number {
+        width: 55px;
+        height: 55px;
+        font-size: 15px;
+        top: 25px;
+        left: 25px;
+    }
+
+    .card h2 {
+        font-size: 28px;
+        margin-top: 70px;
+        margin-bottom: 18px;
+    }
+
+    .card p {
+        font-size: 14px;
+        line-height: 1.6;
+        max-width: 100%;
+    }
+}

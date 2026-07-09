@@ -1,0 +1,166 @@
+@import url('https://fonts.cdnfonts.com/css/satoshi');
+
+.values-section {
+    font-family: 'Satoshi', sans-serif;
+    max-width: 1050px;
+    margin: auto;
+    margin-top: 50px;
+    background: #1358A8;
+    border-radius: 32px;
+    padding: 45px 60px;
+    text-align: center;
+    color: #ffffff;
+}
+
+/* Top pill */
+.values-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 20px;
+    border-radius: 999px;
+    border: 1px solid rgba(255, 255, 255, 0.5);
+    font-size: 14px;
+    margin-bottom: 25px;
+}
+
+.values-pill::before {
+    content: "";
+    width: 8px;
+    height: 8px;
+    background: #1FB65C;
+    border-radius: 50%;
+}
+
+/* Heading */
+.values-section h2 {
+    font-size: 56px;
+    font-weight: 500;
+    margin-bottom: 18px;
+    letter-spacing: -0.5px;
+}
+
+/* Description */
+.values-desc {
+    max-width: 750px;
+    margin: 0 auto;
+    opacity: 0.9;
+    line-height: 1.8;
+    font-size: 16px;
+    min-height: 70px;
+    /* prevents jump when switching */
+}
+
+/* Buttons container */
+.values-buttons {
+    margin-top: 50px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 18px 20px;
+}
+
+/* Button */
+.value-btn {
+    padding: 13px 26px;
+    border-radius: 999px;
+    background: transparent;
+    color: #ffffff;
+    border: 1px solid rgba(255, 255, 255, 0.5);
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-size: 15px;
+    font-weight: 500;
+}
+
+/* Active */
+.value-btn.active {
+    background: #1FB65C;
+    border-color: #1FB65C;
+    color: #ffffff;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+}
+
+/* Mobile: max-width 767px */
+@media (max-width: 767px) {
+    .values-section {
+        margin-top: 30px;
+        padding: 30px 20px;
+        border-radius: 24px;
+    }
+
+    .values-pill {
+        font-size: 12px;
+        padding: 6px 16px;
+        gap: 6px;
+        margin-bottom: 16px;
+    }
+
+    .values-pill::before {
+        width: 6px;
+        height: 6px;
+    }
+
+    .values-section h2 {
+        font-size: 32px;
+        margin-bottom: 14px;
+    }
+
+    .values-desc {
+        font-size: 14px;
+        line-height: 1.5;
+        max-width: 100%;
+        min-height: auto;
+    }
+
+    .values-buttons {
+        gap: 12px 14px;
+    }
+
+    .value-btn {
+        font-size: 13px;
+        padding: 10px 20px;
+    }
+}
+
+/* Tablet: 768px - 1024px */
+@media (min-width: 768px) and (max-width: 1024px) {
+    .values-section {
+        margin-top: 40px;
+        padding: 35px 40px;
+        border-radius: 28px;
+    }
+
+    .values-pill {
+        font-size: 13px;
+        padding: 7px 18px;
+        gap: 7px;
+        margin-bottom: 20px;
+    }
+
+    .values-pill::before {
+        width: 7px;
+        height: 7px;
+    }
+
+    .values-section h2 {
+        font-size: 44px;
+        margin-bottom: 16px;
+    }
+
+    .values-desc {
+        font-size: 15px;
+        line-height: 1.6;
+        max-width: 90%;
+        margin: 0 auto;
+    }
+
+    .values-buttons {
+        gap: 14px 16px;
+    }
+
+    .value-btn {
+        font-size: 14px;
+        padding: 12px 22px;
+    }
+}

@@ -1,0 +1,164 @@
+.service-dropdown {
+  position: absolute;
+  top: 80%;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 900px;
+
+  background: white;
+  border-radius: 20px;
+  box-shadow: 0 30px 80px rgba(0, 0, 0, 0.15);
+  padding: 40px;
+}
+
+
+.dropdown-inner {
+  display: flex;
+  gap: 30px;
+}
+
+
+/* Left */
+.dropdown-left {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  width: 30%;
+}
+.dropdown-left li {
+  font-family: DM Sans, sans-serif;
+  padding: 14px 0;
+  font-size: 15px;
+  color: #919393;
+  border-bottom: 1px solid #eee;
+  cursor: pointer;
+}
+
+.dropdown-left li.active {
+  color: #00A94F;
+  font-weight: 600;
+  border-bottom: 2px solid #0055B8;
+}
+
+.dropdown-middle {
+  width: 25%;
+  transition: transform 0.25s ease;
+}
+
+
+.submenu-link {
+  display: block;
+  font-family: DM Sans, sans-serif;
+  font-size: 15px;
+  color: #8a8a8a;
+  margin-bottom: 14px;
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+/* keeps layout stable if no submenu */
+.submenu-placeholder {
+  height: 1px;
+}
+
+/* Right */
+.dropdown-right {
+  width: 40%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.dropdown-right img {
+  width: 100%;
+  max-width: 420px;
+  border-radius: 24px;
+}
+
+/* ============================= */
+/* TABLET (768px - 1024px) */
+/* ============================= */
+@media (min-width: 768px) and (max-width: 1024px) {
+
+  .service-dropdown {
+    width: 90%;
+    max-width: 700px;
+    padding: 30px;
+    top: 100%;
+  }
+
+  .dropdown-inner {
+    gap: 20px;
+  }
+
+  .dropdown-left {
+    width: 35%;
+  }
+
+  .dropdown-middle {
+    width: 30%;
+  }
+
+  .dropdown-right {
+    width: 35%;
+  }
+
+  .dropdown-right img {
+    max-width: 100%;
+    border-radius: 18px;
+  }
+
+}
+
+/* ============================= */
+/* MOBILE (max-width: 767px) */
+/* ============================= */
+@media (max-width: 767px) {
+
+  .service-dropdown {
+    position: static;
+    transform: none;
+    width: 100%;
+    max-width: 100%;
+    padding: 20px;
+    border-radius: 0;
+    box-shadow: none;
+    margin-top: 15px;
+  }
+
+  .dropdown-inner {
+    flex-direction: column;
+    gap: 25px;
+  }
+
+  .dropdown-left,
+  .dropdown-middle,
+  .dropdown-right {
+    width: 100%;
+  }
+
+  .dropdown-middle {
+    transform: none !important;
+  }
+
+  .dropdown-left li {
+    font-size: 14px;
+    padding: 12px 0;
+  }
+
+  .submenu-link {
+    font-size: 14px;
+  }
+
+  .dropdown-right {
+    justify-content: flex-start;
+  }
+
+  .dropdown-right img {
+    width: 100%;
+    max-width: 100%;
+    border-radius: 16px;
+  }
+
+}
+

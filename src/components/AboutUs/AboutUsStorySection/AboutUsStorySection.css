@@ -1,0 +1,252 @@
+@import url('https://fonts.cdnfonts.com/css/dm-sans');
+@import url('https://fonts.cdnfonts.com/css/satoshi');
+
+.about-story {
+    max-width: 1050px;
+    margin: auto;
+    margin-top: 50px;
+
+}
+
+/* top layout */
+.about-story-top {
+    display: grid;
+    grid-template-columns: 360px 1fr;
+    gap: 80px;
+    align-items: start;
+}
+
+/* left */
+.story-pill {
+    display: inline-block;
+    border: 1px solid #2F80ED;
+    color: #2F80ED;
+    padding: 7px 18px;
+    border-radius: 999px;
+    font-size: 18px;
+    margin-bottom: 24px;
+}
+
+.story-stat h2 {
+    font-family: 'Satoshi', sans-serif;
+    font-size: 70px;
+    color: #0A5DB8;
+    font-weight: 500;
+    line-height: 1;
+}
+
+.story-stat {
+    padding-top: 120px;
+}
+
+.story-stat p {
+    font-family: 'Satoshi', sans-serif;
+    margin-top: 8px;
+    color: #7A7A7A;
+}
+
+/* right */
+.about-story-right p {
+    font-family: 'Satoshi', sans-serif;
+    font-size: 25px;
+    font-weight: 500;
+    color: #5E5E5E;
+    max-width: 720px;
+}
+
+.learn-btn {
+    font-family: 'Satoshi', sans-serif;
+    margin-top: 26px;
+    background: #16A34A;
+    color: white;
+    border: none;
+    padding: 12px 20px;
+    border-radius: 999px;
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    cursor: pointer;
+    transition: .25s;
+    text-decoration: none; /* important for anchor */
+}
+
+.learn-btn span {
+    background: white;
+    color: #16A34A;
+    width: 22px;
+    height: 22px;
+    border-radius: 50%;
+    display: grid;
+    place-items: center;
+    font-size: 12px;
+}
+
+/* images layout */
+.about-story-images {
+    margin-top: 70px;
+    display: grid;
+    grid-template-columns: 1.25fr 1fr;
+    gap: 40px;
+    align-items: start;
+}
+
+.story-img-large img,
+.story-img-small img {
+    width: 100%;
+    border-radius: 22px;
+    display: block;
+}
+
+.story-img-large img {
+    height: 420px;
+    object-fit: cover;
+}
+
+.story-img-small img {
+    height: 300px;
+    object-fit: cover;
+}
+
+.about-story-border {
+    border-bottom: 1px solid #E0E0E0;
+    margin-top: 70px;
+}
+
+/* Mobile: max-width 767px */
+@media (max-width: 767px) {
+    .about-story {
+        margin-top: 30px;
+        padding: 0 20px;
+    }
+
+    /* top layout */
+    .about-story-top {
+        display: block;
+        gap: 30px;
+    }
+
+    .story-pill {
+        font-size: 14px;
+        padding: 5px 12px;
+        margin-bottom: 16px;
+    }
+
+    .story-stat {
+        padding-top: 60px;
+        text-align: center;
+    }
+
+    .story-stat h2 {
+        font-size: 40px;
+    }
+
+    .story-stat p {
+        font-size: 14px;
+        margin-top: 4px;
+    }
+
+    .about-story-right {
+        text-align: center;
+    }
+
+    .about-story-right p {
+        font-size: 18px;
+        max-width: 100%;
+    }
+
+    .learn-btn {
+        margin-top: 20px;
+        font-size: 16px;
+        padding: 10px 16px;
+    }
+
+    .learn-btn span {
+        width: 18px;
+        height: 18px;
+        font-size: 10px;
+    }
+
+    /* images layout */
+    .about-story-images {
+        display: block;
+        gap: 20px;
+    }
+
+    .story-img-large img,
+    .story-img-small img {
+        height: auto;
+    }
+
+    .story-img-large img {
+        margin-bottom: 20px;
+    }
+
+    .story-img-small img {
+        margin-bottom: 20px;
+    }
+}
+
+/* Tablet: 768px - 1024px */
+@media (min-width: 768px) and (max-width: 1024px) {
+    .about-story {
+        margin-top: 40px;
+        padding: 0 30px;
+    }
+
+    /* top layout */
+    .about-story-top {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 40px;
+    }
+
+    .story-pill {
+        font-size: 16px;
+        padding: 6px 14px;
+        margin-bottom: 20px;
+    }
+
+    .story-stat {
+        padding-top: 80px;
+    }
+
+    .story-stat h2 {
+        font-size: 55px;
+    }
+
+    .story-stat p {
+        font-size: 16px;
+        margin-top: 6px;
+    }
+
+    .about-story-right p {
+        font-size: 22px;
+        max-width: 100%;
+    }
+
+    .learn-btn {
+        margin-top: 24px;
+        font-size: 18px;
+        padding: 11px 18px;
+    }
+
+    .learn-btn span {
+        width: 20px;
+        height: 20px;
+        font-size: 11px;
+    }
+
+    /* images layout */
+    .about-story-images {
+        grid-template-columns: 1fr 1fr;
+        gap: 30px;
+    }
+
+    .story-img-large img {
+        height: 350px;
+    }
+
+    .story-img-small img {
+        height: 250px;
+    }
+}

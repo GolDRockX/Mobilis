@@ -1,0 +1,87 @@
+@import url('https://fonts.cdnfonts.com/css/satoshi');
+
+
+.manufacturing-section {
+    max-width: 1050px;
+    margin: auto;
+    font-family: 'Satoshi', sans-serif;
+    margin-top: 50px;
+}
+
+.manufacturing-content {
+    display: flex;
+    gap: 110px;
+}
+
+.manufacturing-heading {
+    width: 50%;
+}
+
+.manufacturing-heading h3 {
+    font-size: 54px;
+    color: #6B6B6B;
+    font-weight: 500;
+}
+
+.manufacturing-text p {
+    font-size: 18px;
+    color: rgba(0, 0, 0, 0.63);
+    line-height: 31px;
+    padding-bottom: 25px;
+}
+
+/* Mobile: max-width 767px */
+@media (max-width: 767px) {
+    .manufacturing-section {
+        margin-top: 30px;
+        padding: 0 20px;
+    }
+
+    .manufacturing-content {
+        display: block;
+        gap: 20px;
+    }
+
+    .manufacturing-heading {
+        width: 100%;
+        text-align: center;
+    }
+
+    .manufacturing-heading h3 {
+        font-size: 28px;
+    }
+
+    .manufacturing-text p {
+        font-size: 14px;
+        line-height: 1.5;
+        padding-bottom: 15px;
+        text-align: center;
+    }
+}
+
+/* Tablet: 768px - 1024px */
+@media (min-width: 768px) and (max-width: 1024px) {
+    .manufacturing-section {
+        margin-top: 40px;
+        padding: 0 30px;
+    }
+
+    .manufacturing-content {
+        display: flex;
+        gap: 60px;
+    }
+
+    .manufacturing-heading {
+        width: 50%;
+    }
+
+    .manufacturing-heading h3 {
+        font-size: 38px;
+    }
+
+    .manufacturing-text p {
+        font-size: 16px;
+        line-height: 1.6;
+        padding-bottom: 20px;
+    }
+}

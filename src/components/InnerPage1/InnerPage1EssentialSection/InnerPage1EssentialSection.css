@@ -1,0 +1,82 @@
+@import url('https://fonts.cdnfonts.com/css/dm-sans');
+@import url('https://fonts.cdnfonts.com/css/satoshi');
+
+
+.inner-page-essential-section {
+    max-width: 1050px;
+    margin: auto;
+    margin-top: 50px;
+}
+
+.essential-heading h2 {
+    font-family: 'Satoshi', sans-serif;
+    font-weight: 500;
+    font-size: 34px;
+    line-height: 75px;
+    color: #0055B8;
+    margin-bottom: 10px;
+    text-transform: uppercase;
+}
+
+.essential-image img {
+    max-width: 1050px;
+    margin: auto;
+}
+
+.essential-content p {
+    font-family: 'Satoshi', sans-serif;
+    font-weight: 400;
+    font-size: 17px;
+    line-height: 38px;
+    color: rgba(0, 0, 0, 0.63);
+    margin-top: 20px;
+    
+}
+
+@media (max-width: 767px) {
+
+  .inner-page-essential-section {
+    padding: 0 20px;
+    margin-top: 30px;
+  }
+
+  .essential-heading h2 {
+    font-size: 22px;
+    line-height: 32px;
+  }
+
+  .essential-content p {
+    font-size: 14px;
+    line-height: 24px;
+    margin-top: 16px;
+  }
+
+  .essential-image img {
+    width: 100% ;
+    height: auto;
+    max-width: 100%;
+  }
+}
+
+@media (min-width: 768px) and (max-width: 1024px) {
+
+  .inner-page-essential-section {
+    padding: 0 40px;
+    margin-top: 40px;
+  }
+
+  .essential-heading h2 {
+    font-size: 28px;
+    line-height: 40px;
+  }
+
+  .essential-content p {
+    font-size: 16px;
+    line-height: 28px;
+  }
+
+  .essential-image img {
+    max-width: 100%;
+    height: auto;
+  }
+}

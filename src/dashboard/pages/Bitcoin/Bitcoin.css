@@ -1,0 +1,172 @@
+.btc-ticker {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 16px;
+  margin-bottom: 20px;
+  padding: 20px 24px;
+}
+
+.btc-ticker-main {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.btc-symbol {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.btc-price {
+  font-size: 32px;
+  font-weight: 700;
+  font-family: 'Space Grotesk', sans-serif;
+  color: var(--text-primary);
+}
+
+.btc-change {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 16px;
+  font-weight: 600;
+}
+.btc-change.positive { color: var(--green); }
+.btc-change.negative { color: var(--red); }
+
+.btc-stats {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  flex-wrap: wrap;
+}
+
+.btc-stat {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+.btc-stat span { font-size: 11px; color: var(--text-muted); }
+.btc-stat strong { font-size: 13px; color: var(--text-primary); font-weight: 600; }
+
+.btc-stat.live {
+  flex-direction: row;
+  align-items: center;
+  gap: 4px;
+  color: var(--green);
+  font-size: 12px;
+  font-weight: 600;
+}
+.btc-stat.live span { font-size: 12px; color: var(--green); }
+
+.btc-layout {
+  display: grid;
+  grid-template-columns: 1fr 320px;
+  gap: 20px;
+  align-items: start;
+}
+@media (max-width: 900px) { .btc-layout { grid-template-columns: 1fr; } }
+
+.btc-chart-card { min-height: 380px; }
+.chart-loading { display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 12px; height: 300px; color: var(--text-muted); font-size: 14px; }
+
+.chart-tooltip {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 10px 14px;
+}
+.chart-tooltip-price { font-weight: 700; font-size: 15px; color: var(--accent); }
+.chart-tooltip-time { font-size: 11px; color: var(--text-muted); margin-top: 2px; }
+
+.trade-balances {
+  display: flex;
+  gap: 16px;
+  margin-bottom: 20px;
+  padding: 12px 16px;
+  background: var(--bg-secondary);
+  border-radius: var(--radius-sm);
+}
+.trade-bal { display: flex; flex-direction: column; gap: 2px; }
+.trade-bal span { font-size: 11px; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.05em; }
+.trade-bal strong { font-size: 15px; color: var(--text-primary); font-weight: 600; }
+
+.trade-form { display: flex; flex-direction: column; gap: 14px; }
+
+.trade-type-toggle {
+  display: flex;
+  background: var(--bg-secondary);
+  border-radius: var(--radius-sm);
+  padding: 3px;
+}
+.trade-type-btn {
+  flex: 1;
+  padding: 9px;
+  border-radius: 6px;
+  font-size: 13px;
+  font-weight: 600;
+  background: transparent;
+  color: var(--text-muted);
+  transition: all 0.2s;
+}
+.trade-type-btn.buy.active { background: var(--green); color: #fff; }
+.trade-type-btn.sell.active { background: var(--red); color: #fff; }
+
+.form-group input {
+  background: var(--bg-secondary);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  padding: 11px 14px;
+  color: var(--text-primary);
+  font-size: 14px;
+  width: 100%;
+  transition: border 0.2s;
+}
+.form-group input:focus { border-color: var(--accent); }
+
+.trade-estimate {
+  text-align: center;
+  font-size: 13px;
+  color: var(--text-secondary);
+  background: var(--bg-secondary);
+  padding: 8px;
+  border-radius: var(--radius-sm);
+}
+
+.trade-msg {
+  padding: 10px 14px;
+  border-radius: var(--radius-sm);
+  font-size: 13px;
+}
+.trade-msg.success { background: var(--green-dim); color: var(--green); }
+.trade-msg.error { background: var(--red-dim); color: var(--red); }
+
+.trade-submit {
+  width: 100%;
+  padding: 13px;
+  border-radius: var(--radius-sm);
+  font-weight: 700;
+  font-size: 15px;
+  color: #fff;
+  transition: opacity 0.2s;
+}
+.trade-submit.buy { background: var(--green); }
+.trade-submit.sell { background: var(--red); }
+.trade-submit:disabled { opacity: 0.5; cursor: not-allowed; }
+
+@media (min-width: 768px) and (max-width: 1024px) {
+  .btc-layout { grid-template-columns: 1fr; }
+  .btc-trade-card { max-width: 100%; }
+}
+@media (max-width: 767px) {
+  .btc-layout { grid-template-columns: 1fr; }
+  .btc-price { font-size: 24px; }
+  .btc-ticker { flex-direction: column; align-items: flex-start; gap: 12px; }
+  .btc-stats { gap: 16px; flex-wrap: wrap; }
+}

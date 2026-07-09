@@ -1,0 +1,90 @@
+@import url('https://fonts.cdnfonts.com/css/satoshi');
+
+.appointmentInfo {
+    width: 100%;
+    padding: 80px 20px;
+    font-family: 'Satoshi', sans-serif;
+}
+
+.appointmentInfoContainer {
+    max-width: 1150px;
+    margin: auto;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 40px;
+}
+
+/* LEFT CARD */
+.infoCard {
+    border: 1px solid #5b86ff;
+    border-radius: 14px;
+    padding: 40px 36px;
+}
+
+.infoCard h2 {
+    font-size: 38px;
+    font-weight: 500;
+    color: #7a7a7a;
+    margin-bottom: 26px;
+}
+
+/* TEXT */
+.infoText {
+    margin-bottom: 26px;
+}
+
+.companyName {
+    font-size: 16px;
+    color: #0f5fb5;
+    font-weight: 400;
+}
+
+.companySub {
+    font-size: 16px;
+    color: #0f5fb5;
+}
+
+/* INFO LIST */
+.infoList {
+    display: flex;
+    flex-direction: column;
+    gap: 22px;
+}
+
+.infoItem {
+    display: flex;
+    gap: 14px;
+    align-items: flex-start;
+    font-size: 16px;
+    color: #1f2933;
+    line-height: 1.5;
+}
+
+.infoItem img {
+    width: 21px;
+    height: 21px;
+    margin-top: 2px;
+}
+
+/* MAP */
+.mapCard {
+    border-radius: 14px;
+    overflow: hidden;
+}
+
+.mapCard img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* RESPONSIVE */
+@media (max-width: 900px) {
+    .appointmentInfoContainer {
+        grid-template-columns: 1fr;
+    }
+
+    .infoCard {
+        padding: 32px 26px;
+    }
+}

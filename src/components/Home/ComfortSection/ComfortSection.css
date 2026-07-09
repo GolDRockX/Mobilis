@@ -1,0 +1,226 @@
+@import url('https://fonts.cdnfonts.com/css/dm-sans');
+@import url('https://fonts.cdnfonts.com/css/satoshi');
+
+.comfort {
+    position: relative;
+    height: 920px;
+    /* was 700 */
+    overflow: hidden;
+    max-width: 1500px;
+    /* slightly wider canvas */
+    margin: auto;
+}
+
+
+.comfort-hero {
+    position: absolute;
+    left: 50%;
+    top: 55%;
+    transform: translate(-50%, -50%);
+    height: 620px;
+    /* slightly larger hero */
+    z-index: 3;
+}
+
+.comfort-bg-text {
+    position: absolute;
+    left: 50%;
+    top: 55%;
+    transform: translate(-50%, -50%);
+    width: 1345px;
+    /* reduced from 1345px */
+    pointer-events: none;
+    z-index: 4;
+}
+
+.comfort-item {
+    position: absolute;
+    text-align: center;
+    cursor: pointer;
+    transition: transform .35s ease;
+    z-index: 4;
+
+}
+
+.comfort-img {
+    width: 70px;
+    transition: all .35s ease;
+    filter: grayscale(100%);
+}
+
+.comfort-item.active .comfort-img {
+    width: 100px;
+    filter: grayscale(0%);
+    transform: translateY(-10px);
+
+}
+
+.leftTop {
+    top: 200px;
+    left: 120px;
+}
+
+.topCenter {
+    left: 38%;
+    transform: translateX(-50%);
+}
+
+.topRight {
+    top: 35px;
+    right: 475px;
+}
+
+.right {
+    top: 110px;
+    right: 60px;
+}
+
+.bottomRight {
+    bottom: 120px;
+    right: 200px;
+}
+
+.bottomLeft {
+    bottom: 120px;
+    left: 180px;
+}
+
+.comfort-label {
+    display: block;
+    position: relative;
+    transition: color .25s ease;
+    font-family: 'Satoshi', sans-serif;
+    font-size: 17px;
+    color: #777;
+    margin-top: 8px;
+}
+
+
+
+.comfort-label::after {
+    content: "";
+    position: absolute;
+    bottom: -4px;
+    left: 0;
+    width: 0%;
+    height: 2px;
+    background: #00A94F;
+    transition: width .35s ease;
+}
+
+.comfort-item:hover .comfort-label,
+.comfort-item.active .comfort-label {
+    color: #0055B8;
+}
+
+.comfort-item.active .comfort-label::after {
+    width: 100%;
+}
+
+@media (max-width: 767px) {
+
+  .comfort {
+    height: 620px;
+  }
+
+  .comfort-hero {
+    height: 380px;
+    top: 50%;
+  }
+
+  .comfort-bg-text {
+    width: 90%;
+    top: 50%;
+  }
+
+  .comfort-img {
+    width: 50px;
+  }
+
+  .comfort-item.active .comfort-img {
+    width: 70px;
+  }
+
+  .comfort-label {
+    font-size: 13px;
+  }
+
+  /* Reposition proportionally */
+  .leftTop {
+    top: 80px;
+    left: 30px;
+  }
+
+  .topCenter {
+    top: 20px;
+    left: 50%;
+  }
+
+  .topRight {
+    top: 40px;
+    right: 40px;
+  }
+
+  .right {
+    top: 150px;
+    right: 10px;
+  }
+
+  .bottomRight {
+    bottom: 60px;
+    right: 40px;
+  }
+
+  .bottomLeft {
+    bottom: 60px;
+    left: 40px;
+  }
+}
+
+@media (min-width: 768px) and (max-width: 1024px) {
+
+  .comfort {
+    height: 760px;
+  }
+
+  .comfort-hero {
+    height: 500px;
+  }
+
+  .comfort-bg-text {
+    width: 1000px;
+  }
+
+  .comfort-img {
+    width: 60px;
+  }
+
+  .comfort-item.active .comfort-img {
+    width: 85px;
+  }
+
+  .comfort-label {
+    font-size: 15px;
+  }
+
+  .leftTop {
+    top: 150px;
+    left: 80px;
+  }
+
+  .topRight {
+    right: 200px;
+  }
+
+  .right {
+    right: 30px;
+  }
+
+  .bottomRight {
+    right: 100px;
+  }
+
+  .bottomLeft {
+    left: 100px;
+  }
+}

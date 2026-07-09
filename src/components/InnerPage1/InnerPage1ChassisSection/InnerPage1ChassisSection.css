@@ -1,0 +1,107 @@
+@import url('https://fonts.cdnfonts.com/css/dm-sans');
+@import url('https://fonts.cdnfonts.com/css/satoshi');
+
+
+.inner-page-chassis-section {
+    max-width: 1050px;
+    margin: auto;
+    margin-top: 50px;
+}
+
+.chassis-heading {
+    font-family: 'Satoshi', sans-serif;
+    font-weight: 500;
+    font-size: 34px;
+    line-height: 75px;
+    color: #0055B8;
+    margin-bottom: 10px;
+    text-transform: uppercase;
+}
+
+.chassis-content p {
+    font-family: 'Satoshi', sans-serif;
+    font-weight: 400;
+    font-size: 17px;
+    line-height: 38px;
+    color: rgba(0, 0, 0, 0.63);
+    margin-top: 20px;
+}
+
+.chassis-images {
+    display: flex;
+    gap: 20px;
+    margin-top: 30px;
+}
+
+.chassis-image-1, .chassis-image-2 {
+    width: 50%;
+    height: auto;
+    border-radius: 10px;
+}
+
+.chassis-image-1 img, .chassis-image-2 img {
+    max-width: 500px;
+    margin: auto;
+}
+
+@media (max-width: 767px) {
+
+  .inner-page-chassis-section {
+    padding: 0 20px;
+    margin-top: 30px;
+  }
+
+  .chassis-heading {
+    font-size: 22px;
+    line-height: 32px;
+  }
+
+  .chassis-content p {
+    font-size: 14px;
+    line-height: 24px;
+  }
+
+  /* Stack images */
+  .chassis-images {
+    flex-direction: column;
+    gap: 15px;
+  }
+
+  .chassis-image-1,
+  .chassis-image-2 {
+    width: 100%;
+  }
+
+  .chassis-image-1 img,
+  .chassis-image-2 img {
+    max-width: 100%;
+    width: 100%;
+    height: auto;
+  }
+}
+
+@media (min-width: 768px) and (max-width: 1024px) {
+
+  .inner-page-chassis-section {
+    padding: 0 40px;
+  }
+
+  .chassis-heading {
+    font-size: 28px;
+    line-height: 40px;
+  }
+
+  .chassis-content p {
+    font-size: 16px;
+    line-height: 28px;
+  }
+
+  .chassis-images {
+    gap: 15px;
+  }
+
+  .chassis-image-1 img,
+  .chassis-image-2 img {
+    max-width: 100%;
+  }
+}

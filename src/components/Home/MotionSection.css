@@ -1,0 +1,129 @@
+@import url('https://fonts.cdnfonts.com/css/dm-sans');
+@import url('https://fonts.cdnfonts.com/css/satoshi');
+
+.motion {
+    position: relative;
+    width: 100%;
+    height: 520px;
+    overflow: hidden;
+    color: white;
+}
+
+/* Background image */
+.motion-bg {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+}
+
+/* Gradient overlay */
+.motion-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(180deg,
+            #0055B8 0%,
+            #00A94F 100%);
+    opacity: 0.72;
+}
+
+/* Content layout */
+.motion-content {
+    position: relative;
+    z-index: 2;
+    max-width: 1055px;
+    height: 100%;
+    margin: auto;
+
+    display: grid;
+    grid-template-columns: 1.1fr 1fr;
+    gap: 80px;
+}
+
+/* Left */
+.motion-left h2 {
+    font-family: 'Satoshi', sans-serif;
+    font-size: 42px;
+    font-weight: 500;
+    line-height: 57px;
+    padding-top: 60px;
+}
+
+/* Right */
+.motion-right {
+    max-width: 420px;
+    padding-top: 240px;
+}
+
+.motion-right p {
+    font-family: 'Satoshi', sans-serif;
+    font-size: 22px;
+    line-height: 110%;
+    margin-bottom: 28px;
+    opacity: 0.95;
+}
+
+/* ============================= */
+/* TABLET (768px - 1024px) */
+/* ============================= */
+@media (min-width: 768px) and (max-width: 1024px) {
+
+  .motion {
+    height: 420px;
+  }
+
+  .motion-content {
+    gap: 40px;
+    padding: 0 40px;
+  }
+
+  .motion-left h2 {
+    font-size: 32px;
+    line-height: 44px;
+    padding-top: 60px;
+  }
+
+  .motion-right {
+    padding-top: 160px;
+    max-width: 360px;
+  }
+
+  .motion-right p {
+    font-size: 18px;
+  }
+
+}
+
+/* ============================= */
+/* MOBILE (max-width: 767px) */
+/* ============================= */
+@media (max-width: 767px) {
+
+  .motion {
+    height: auto;
+    padding: 60px 20px;
+  }
+
+  .motion-content {
+    grid-template-columns: 1fr;
+    gap: 30px;
+    height: auto;
+  }
+
+  .motion-left h2 {
+    font-size: 26px;
+    line-height: 36px;
+    padding-top: 0;
+  }
+
+  .motion-right {
+    padding-top: 0;
+    max-width: 100%;
+  }
+
+  .motion-right p {
+    font-size: 16px;
+    line-height: 140%;
+  }
+
+}

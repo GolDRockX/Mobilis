@@ -1,0 +1,263 @@
+@import url('https://fonts.cdnfonts.com/css/dm-sans');
+@import url('https://fonts.cdnfonts.com/css/satoshi');
+
+.about-hero {
+  max-width: 1200px;
+  margin: auto;
+  position: relative;
+  height: 720px;
+  border-radius: 26px;
+  overflow: hidden;
+}
+
+/* background image */
+.about-hero-bg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+
+/* layout */
+.about-hero-content {
+  position: relative;
+  z-index: 2;
+  height: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: end;
+  color: white;
+  padding-bottom: 50px;
+  padding-left: 37px;
+  padding-right: 37px;
+}
+
+/* LEFT SIDE */
+.about-hero-left {
+  max-width: 540px;
+}
+
+.about-pill {
+  font-family: 'Satoshi', sans-serif;
+  display: inline-block;
+  background: rgba(255, 255, 255, 0.2);
+  padding: 10px 35px;
+  border-radius: 999px;
+  backdrop-filter: blur(6px);
+  margin-bottom: 22px;
+  font-size: 17px;
+}
+
+.about-hero-left h1 {
+  font-family: 'Satoshi', sans-serif;
+  font-size: 56px;
+  line-height: 1.15;
+  font-weight: 500;
+}
+
+/* RIGHT SIDE */
+.about-hero-right {
+  max-width: 360px;
+  text-align: left;
+}
+
+.about-hero-right p {
+  font-family: 'Satoshi', sans-serif;
+  opacity: .95;
+  line-height: 1.6;
+  margin-bottom: 22px;
+}
+
+/* button */
+.discover-btn {
+  background: white;
+  color: #000;
+  border: none;
+  padding: 14px 22px;
+  border-radius: 999px;
+  font-weight: 500;
+  cursor: pointer;
+  display: inline-flex;
+  gap: 10px;
+  align-items: center;
+  transition: .25s;
+  float: right;
+  font-family: 'Satoshi', sans-serif;
+  text-decoration: none;
+  /* remove underline */
+}
+
+.discover-btn span {
+  background: #17B26A;
+  color: white;
+  width: 24px;
+  height: 24px;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+}
+
+/* scroll indicator */
+.a-scroll-indicator {
+  margin-top: 40px;
+  align-items: center;
+  opacity: 0.9;
+  font-family: 'Satoshi', sans-serif;
+  background: rgba(255, 255, 255, 0.2);
+  padding: 27px 35px;
+  border-radius: 30px;
+  backdrop-filter: blur(6px);
+  margin-bottom: 22px;
+  font-size: 17px;
+  max-width: 166px;
+  text-align: center;
+  margin-left: 190px;
+}
+
+.a-mouse {
+  width: 26px;
+  height: 40px;
+  border: 2px solid white;
+  border-radius: 20px;
+  position: relative;
+  margin-left: 32px;
+}
+
+.a-mouse::after {
+  content: "";
+  position: absolute;
+  top: 8px;
+  left: 50%;
+  width: 4px;
+  height: 8px;
+  background: white;
+  border-radius: 3px;
+  transform: translateX(-50%);
+  animation: scroll 1.4s infinite;
+}
+
+@keyframes scroll {
+  0% {
+    opacity: 0;
+    transform: translate(-50%, 0);
+  }
+
+  50% {
+    opacity: 1;
+  }
+
+  100% {
+    opacity: 0;
+    transform: translate(-50%, 12px);
+  }
+}
+
+@media (max-width: 767px) {
+
+  .about-hero {
+    height: auto;
+    padding: 30px 20px;
+    display: flex;
+    flex-direction: column;
+    border-radius: 20px;
+  }
+
+  .about-hero-content {
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+    padding: 20px;
+  }
+
+  /* LEFT SIDE */
+  .about-hero-left {
+    max-width: 100%;
+    margin-bottom: 20px;
+  }
+
+  .about-pill {
+    font-size: 14px;
+    padding: 6px 20px;
+    margin-bottom: 12px;
+  }
+
+  .about-hero-left h1 {
+    font-size: 28px;
+    line-height: 34px;
+  }
+
+  /* RIGHT SIDE */
+  .about-hero-right {
+    max-width: 100%;
+    text-align: left;
+    margin-bottom: 20px;
+  }
+
+  .about-hero-right p {
+    font-size: 14px;
+    line-height: 22px;
+  }
+
+  /* Button */
+  .discover-btn {
+    font-size: 14px;
+    padding: 10px 18px;
+  }
+
+  .discover-btn span {
+    width: 20px;
+    height: 20px;
+    font-size: 14px;
+  }
+
+  /* Scroll indicator */
+  .a-scroll-indicator {
+    display: none;
+  }
+}
+
+@media (min-width: 768px) and (max-width: 1024px) {
+
+  .about-hero {
+    height: 500px;
+    padding: 30px 40px;
+  }
+
+  .about-hero-content {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: flex-end;
+    padding-bottom: 30px;
+  }
+
+  .about-hero-left {
+    max-width: 320px;
+  }
+
+  .about-pill {
+    font-size: 16px;
+    padding: 8px 28px;
+  }
+
+  .about-hero-left h1 {
+    font-size: 36px;
+    line-height: 42px;
+  }
+
+  .about-hero-right p {
+    font-size: 15px;
+    line-height: 24px;
+  }
+
+  .discover-btn {
+    font-size: 14px;
+    padding: 10px 20px;
+  }
+
+  .a-scroll-indicator {
+    max-width: 150px;
+    font-size: 15px;
+    padding: 20px 28px;
+    margin-left: 0;
+  }
+}

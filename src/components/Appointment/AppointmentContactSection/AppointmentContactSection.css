@@ -1,0 +1,199 @@
+@import url('https://fonts.cdnfonts.com/css/satoshi');
+
+.appointmentContact {
+    width: 100%;
+    padding: 70px 20px;
+    font-family: 'Satoshi', sans-serif;
+}
+
+.appointmentContainer {
+    max-width: 1150px;
+    margin: auto;
+}
+
+/* GRID */
+
+.appointmentForm {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 22px 28px;
+}
+
+/* FIELD */
+
+.formField {
+    display: flex;
+    flex-direction: column;
+}
+
+
+/* OUTLINED FIELDS */
+
+.outlinedField fieldset {
+    position: relative;
+    border: 1px solid #cfd6dc;
+    border-radius: 8px;
+    padding: 0;
+    height: 60px;
+    transition: border .2s;
+}
+
+.outlinedField textarea + fieldset,
+.outlinedField.textarea fieldset {
+    height: auto;
+}
+
+.outlinedField legend {
+    font-size: 14px;
+    padding: 0 8px;
+    margin-left: 10px;
+    color: #666;
+    background: white;
+    font-weight: 500;
+}
+
+.outlinedField input,
+.outlinedField select,
+.outlinedField textarea {
+    width: 100%;
+    height: 100%;
+    border: none;
+    outline: none;
+    padding: 0 14px;
+    font-size: 14px;
+    background: transparent;
+    font-family: 'Satoshi', sans-serif;
+}
+
+.outlinedField textarea {
+    min-height: 180px;
+    padding-top: 14px;
+    resize: none;
+}
+
+/* focus */
+.outlinedField fieldset:focus-within {
+    border-color: #0f5fb5;
+}
+
+.outlinedField fieldset:focus-within legend {
+    color: #0f5fb5;
+}
+
+/* PLACEHOLDER */
+::placeholder {
+    color: #9aa3ab;
+    font-size: 13px;
+}
+
+/* SELECT MATCH INPUT STYLE */
+.outlinedField select {
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    cursor: pointer;
+    color: #333;
+}
+
+/* Select placeholder color */
+.outlinedField select:has(option[value=""]:checked) {
+    color: #9aa3ab;
+}
+
+/* Dropdown arrow */
+.outlinedField {
+    position: relative;
+}
+
+/* SELECT ONLY ARROW */
+.selectField {
+    position: relative;
+}
+
+.selectField::after {
+    content: "";
+    position: absolute;
+    right: 14px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 0;
+    height: 0;
+    pointer-events: none;
+    border-left: 5px solid transparent;
+    border-right: 5px solid transparent;
+    border-top: 5px solid #7b8794;
+}
+
+
+/* Slight legend polish */
+.outlinedField legend {
+    font-size: 14px;
+    letter-spacing: 0.02em;
+}
+
+
+
+
+/* MEMBER RADIO */
+
+.memberField {
+    justify-content: center;
+}
+
+.radioGroup {
+    display: flex;
+    gap: 20px;
+    align-items: center;
+    height: 46px;
+}
+
+.radio {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 14px;
+}
+
+/* FULL WIDTH */
+
+.fullWidth {
+    grid-column: 1 / -1;
+}
+
+/* SUBMIT */
+
+.submitRow {
+    grid-column: 1 / -1;
+    display: flex;
+    justify-content: center;
+    margin-top: 10px;
+}
+
+.submitBtn {
+    background: #115bb3;
+    color: white;
+    border: none;
+    padding: 12px 26px;
+    border-radius: 28px;
+    font-size: 14px;
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    cursor: pointer;
+    transition: .2s;
+}
+
+.submitBtn:hover {
+    background: #0c4b93;
+}
+
+.arrow {
+    width: 26px;
+    height: 26px;
+    background: #ffffff;
+    color: #000;
+    border-radius: 50%;
+    display: grid;
+    place-items: center;
+    font-size: 14px;
+}

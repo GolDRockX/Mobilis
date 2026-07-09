@@ -1,0 +1,106 @@
+@import url('https://fonts.cdnfonts.com/css/satoshi');
+
+.motionSection {
+    width: 100%;
+    padding: 90px 20px 60px;
+    font-family: 'Satoshi', sans-serif;
+}
+
+.motionContainer {
+    max-width: 1150px;
+    margin: auto;
+}
+
+/* HEADER */
+
+.motionHeader {
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    align-items: center;
+    margin-bottom: 38px;
+}
+
+.motionNav {
+    font-size: 12px;
+    letter-spacing: .08em;
+    color: #1d5fbf;
+    cursor: pointer;
+    user-select: none;
+}
+
+.motionNav.prev { justify-self: start; }
+.motionNav.next { justify-self: end; }
+
+.motionNav:hover {
+    text-decoration: underline;
+}
+
+/* TITLE */
+
+.motionTitle {
+    text-align: center;
+}
+
+.motionTitle h2 {
+    margin: 0;
+    font-size: 46px;
+    font-weight: 500;
+    color: #7a7a7a;
+    letter-spacing: .02em;
+}
+
+.motionTitle h3 {
+    margin: 0;
+    font-size: 46px;
+    color: #19a751;
+    font-weight: 500;
+    letter-spacing: .02em;
+}
+
+/* VIDEO */
+
+.motionVideo {
+    position: relative;
+    border-radius: 20px;
+    overflow: hidden;
+    cursor: pointer;
+}
+
+.motionVideo img {
+    width: 100%;
+    height: 520px;
+    object-fit: cover;
+    display: block;
+    transition: transform .6s ease;
+}
+
+.motionVideo:hover img {
+    transform: scale(1.05);
+}
+
+/* overlay */
+
+.overlay {
+    position: absolute;
+    inset: 0;
+    background: rgba(0,0,0,.35);
+}
+
+/* play button */
+
+.playBtn {
+    position: absolute;
+    inset: 0;
+    display: grid;
+    place-items: center;
+}
+
+.playBtn img {
+    width: 70px;
+    height: 70px;
+    transition: transform .25s ease;
+}
+
+.motionVideo:hover .playBtn img {
+    transform: scale(1.15);
+}
