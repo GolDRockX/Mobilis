@@ -99,8 +99,11 @@ const allowedOrigins = (process.env.CLIENT_URL || 'http://localhost:5173')
   .split(',')
   .map(o => o.trim());
 
+console.log('CORS allowed origins:', JSON.stringify(allowedOrigins));
+
 app.use(cors({
   origin: (origin, callback) => {
+    console.log('Incoming request origin:', JSON.stringify(origin), '| allowed?', !origin || allowedOrigins.includes(origin));
     if (!origin || allowedOrigins.includes(origin)) {
       callback(null, true);
     } else {
