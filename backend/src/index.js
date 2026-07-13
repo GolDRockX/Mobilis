@@ -112,6 +112,11 @@ app.use(cors({
   },
   credentials: true
 }));
+
+// Explicit catch-all OPTIONS handler as a safety net, in case something in
+// front of the app (proxy/load balancer) needs an explicit route to forward through.
+app.options('*', cors());
+
 app.use(express.json());
 
 // Dashboard routes (JWT auth)
