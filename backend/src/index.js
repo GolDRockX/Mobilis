@@ -99,12 +99,19 @@ const allowedOrigins = (process.env.CLIENT_URL || 'http://localhost:5173')
   .split(',')
   .map(o => o.trim());
 
-console.log('CORS allowed origins:', JSON.stringify(allowedOrigins));
+// Vercel generates a unique preview URL for every deployment (e.g.
+// mobilis-<hash>-<team>.vercel.app), not just the stable production one.
+// This regex allows any *.vercel.app subdomain so preview deploys work too,
+// in addition to the exact origins listed in CLIENT_URL above.
+const vercelPreviewPattern = /^https:\/\/[a-z0-9-]+\.vercel\.app$/;
+
+console.log('CORS allowed origins:', JSON.stringify(allowedOrigins), '+ any *.vercel.app preview URL');
 
 app.use(cors({
   origin: (origin, callback) => {
-    console.log('Incoming request origin:', JSON.stringify(origin), '| allowed?', !origin || allowedOrigins.includes(origin));
-    if (!origin || allowedOrigins.includes(origin)) {
+    const isAllowed = !origin || allowedOrigins.includes(origin) || vercelPreviewPattern.test(origin);
+    console.log('Incoming request origin:', JSON.stringify(origin), '| allowed?', isAllowed);
+    if (isAllowed) {
       callback(null, true);
     } else {
       callback(new Error('Not allowed by CORS'));
