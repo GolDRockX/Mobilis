@@ -5,10 +5,25 @@ import {
   AreaChart, Area, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer,
   ReferenceLine
 } from 'recharts';
-import { TrendingUp, TrendingDown, FlaskConical, RotateCcw, DollarSign } from 'lucide-react';
+import { TrendingUp, TrendingDown, FlaskConical, RotateCcw, DollarSign, Image, Droplet, Vote, Package, UserCheck } from 'lucide-react';
+import { useBlockchain } from '../../blockchain/useBlockchain';
+import NFTTab from '../../blockchain/components/NFTTab';
+import DeFiTab from '../../blockchain/components/DeFiTab';
+import DAOTab from '../../blockchain/components/DAOTab';
+import SupplyChainTab from '../../blockchain/components/SupplyChainTab';
+import IdentityTab from '../../blockchain/components/IdentityTab';
 import './BitcoinTest.css';
 
-const STARTING_USD = 500000;
+const SUB_TABS = [
+  { key: 'trading', label: 'BTC Trading', icon: FlaskConical },
+  { key: 'nft', label: 'NFT Marketplace', icon: Image },
+  { key: 'defi', label: 'DeFi', icon: Droplet },
+  { key: 'dao', label: 'DAO Voting', icon: Vote },
+  { key: 'supplychain', label: 'Supply Chain', icon: Package },
+  { key: 'identity', label: 'Identity', icon: UserCheck },
+];
+
+const STARTING_USD = 10000;
 
 const CustomTooltip = ({ active, payload }) => {
   if (active && payload?.length) {
@@ -24,6 +39,8 @@ const CustomTooltip = ({ active, payload }) => {
 
 export default function BitcoinTest() {
   const { onMenuToggle } = useOutletContext();
+  const [activeTab, setActiveTab] = useState('trading');
+  const chain = useBlockchain();
 
   // Simulated wallet state (in memory only)
   const [simUsd, setSimUsd] = useState(STARTING_USD);
@@ -108,6 +125,28 @@ export default function BitcoinTest() {
       <Header title="Bitcoin Test Trading" onMenuToggle={onMenuToggle} />
       <div className="page-content">
 
+        {/* Sub-tab navigation */}
+        <div className="chain-tabs">
+          {SUB_TABS.map(({ key, label, icon: Icon }) => (
+            <button
+              key={key}
+              className={`chain-tab ${activeTab === key ? 'active' : ''}`}
+              onClick={() => setActiveTab(key)}
+            >
+              <Icon size={15} />
+              <span>{label}</span>
+            </button>
+          ))}
+        </div>
+
+        {activeTab === 'nft' && <NFTTab chain={chain} />}
+        {activeTab === 'defi' && <DeFiTab chain={chain} />}
+        {activeTab === 'dao' && <DAOTab chain={chain} />}
+        {activeTab === 'supplychain' && <SupplyChainTab chain={chain} />}
+        {activeTab === 'identity' && <IdentityTab chain={chain} />}
+
+        {activeTab === 'trading' && (
+        <>
         <div className="test-banner">
           <FlaskConical size={18} color="var(--accent)" />
           <span>This is a <strong>simulated environment</strong> — no real money or wallet is involved. Practice trading safely.</span>
@@ -163,7 +202,7 @@ export default function BitcoinTest() {
         <div className="btc-layout">
           {/* Chart */}
           <div className="card btc-chart-card">
-            
+            <h3 className="section-title">Live BTC Price (10s updates)</h3>
             {priceData.length < 2 ? (
               <div className="chart-loading"><div className="spinner" /><p>Loading live data...</p></div>
             ) : (
@@ -270,6 +309,8 @@ export default function BitcoinTest() {
               </table>
             </div>
           </div>
+        )}
+        </>
         )}
       </div>
     </div>

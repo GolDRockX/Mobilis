@@ -41,3 +41,201 @@
 @media (max-width: 767px) {
   .test-pnl-grid { grid-template-columns: 1fr 1fr; }
 }
+
+/* ── Blockchain sandbox sub-tabs ── */
+.chain-tabs {
+  display: flex;
+  gap: 6px;
+  overflow-x: auto;
+  padding-bottom: 4px;
+  margin-bottom: 20px;
+  border-bottom: 1px solid var(--border);
+}
+
+.chain-tab {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  padding: 10px 16px;
+  background: transparent;
+  color: var(--text-secondary);
+  font-size: 13px;
+  font-weight: 600;
+  border-radius: var(--radius-sm) var(--radius-sm) 0 0;
+  white-space: nowrap;
+  transition: all 0.15s;
+  border-bottom: 2px solid transparent;
+}
+.chain-tab:hover { color: var(--text-primary); background: var(--bg-hover); }
+.chain-tab.active {
+  color: var(--accent);
+  border-bottom: 2px solid var(--accent);
+  background: var(--accent-dim);
+}
+
+.chain-banner {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 12px 16px;
+  border-radius: var(--radius-sm);
+  font-size: 13px;
+  margin-bottom: 16px;
+  line-height: 1.5;
+}
+.chain-banner code {
+  background: rgba(0,0,0,0.2);
+  padding: 1px 6px;
+  border-radius: 4px;
+  font-size: 12px;
+}
+.chain-banner-error { background: var(--red-dim); color: var(--red); border: 1px solid rgba(239,68,68,0.3); }
+.chain-banner-warning { background: rgba(247,147,26,0.12); color: var(--accent); border: 1px solid var(--border-accent); }
+.chain-banner-success { background: var(--green-dim); color: var(--green); border: 1px solid rgba(34,197,94,0.3); }
+
+.chain-account-selector {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  padding: 10px 14px;
+  margin-bottom: 4px;
+}
+
+.chain-account-select {
+  flex: 1;
+  background: var(--bg-secondary);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  padding: 7px 10px;
+  color: var(--text-primary);
+  font-size: 13px;
+}
+
+.chain-balance {
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--accent);
+  white-space: nowrap;
+}
+
+.chain-inline-form {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+.chain-inline-form input {
+  flex: 1;
+  min-width: 150px;
+  background: var(--bg-secondary);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  padding: 10px 14px;
+  color: var(--text-primary);
+  font-size: 14px;
+}
+.chain-inline-form input:focus { border-color: var(--accent); outline: none; }
+
+.chain-active-badge {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  background: rgba(247,147,26,0.12);
+  color: var(--accent);
+  padding: 3px 10px;
+  border-radius: 20px;
+  font-size: 11px;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+/* NFT grid */
+.nft-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+  gap: 14px;
+}
+
+.nft-card {
+  background: var(--bg-secondary);
+  border-radius: var(--radius-sm);
+  overflow: hidden;
+  border: 1px solid var(--border);
+}
+
+.nft-card-image {
+  height: 100px;
+  background: var(--bg-primary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.nft-card-body { padding: 12px; }
+.nft-card-title { font-size: 13px; font-weight: 600; color: var(--text-primary); margin-bottom: 2px; word-break: break-word; }
+.nft-card-id { font-size: 11px; color: var(--text-muted); margin-bottom: 6px; }
+.nft-card-owner { font-size: 11px; color: var(--text-secondary); margin-bottom: 8px; }
+
+.nft-listed-row {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.nft-price-input {
+  flex: 1;
+  min-width: 0;
+  background: var(--bg-primary);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  padding: 5px 8px;
+  color: var(--text-primary);
+  font-size: 12px;
+}
+
+/* DAO proposal cards */
+.dao-proposal-card {
+  background: var(--bg-secondary);
+  border-radius: var(--radius-sm);
+  padding: 16px;
+  border: 1px solid var(--border);
+}
+
+.dao-vote-bar {
+  height: 6px;
+  background: var(--red-dim);
+  border-radius: 4px;
+  overflow: hidden;
+  margin-top: 12px;
+}
+.dao-vote-bar-fill {
+  height: 100%;
+  background: var(--green);
+  transition: width 0.3s;
+}
+
+/* Supply chain history */
+.supply-history {
+  margin-top: 12px;
+  padding: 12px;
+  background: var(--bg-primary);
+  border-radius: var(--radius-sm);
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.supply-history-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  font-size: 12px;
+  color: var(--text-secondary);
+}
+
+@media (max-width: 767px) {
+  .chain-tabs { gap: 4px; }
+  .chain-tab { padding: 8px 12px; font-size: 12px; }
+  .chain-tab span { display: none; }
+}
