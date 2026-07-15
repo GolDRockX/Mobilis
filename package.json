@@ -9,7 +9,7 @@
     "dev:backend": "cd backend && npm run dev",
     "build": "vite build",
     "preview": "vite preview",
-    "start": "npm --prefix backend install && npm --prefix backend start"
+    "start": "test -d backend/node_modules || npm --prefix backend install; npm --prefix backend start"
   },
   "dependencies": {
     "react": "^19.2.0",
