@@ -78,7 +78,15 @@ app.get('/api/v1', (req, res) => {
 // the /api/v1/btc-price REST endpoint directly when a WebSocket isn't
 // available, so live pricing still works — just via polling instead of push.
 
-const PORT = process.env.PORT || 3000;
-app.listen(PORT, () => {
-  console.log(`Mobilis unified server running on port ${PORT}`);
-});
+// @vercel/node's classic builder invokes the exported Express app directly
+// per request (it doesn't need app.listen() — Vercel handles the server
+// lifecycle itself). We only call listen() when running this file directly
+// (e.g. `node server.mjs` locally), which this export default doesn't prevent.
+export default app;
+
+if (process.env.VERCEL === undefined) {
+  const PORT = process.env.PORT || 3000;
+  app.listen(PORT, () => {
+    console.log(`Mobilis unified server running on port ${PORT}`);
+  });
+}
