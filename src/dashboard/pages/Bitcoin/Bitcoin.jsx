@@ -1,4 +1,4 @@
-import { useEffect, useState, useRef, useCallback } from 'react';
+import { useEffect, useState, useCallback } from 'react';
 import { useAuth } from '../../context/AuthContext';
 import Header from '../../components/Header/Header';
 import { useOutletContext } from 'react-router-dom';
@@ -30,7 +30,6 @@ export default function Bitcoin() {
   const [tradeMsg, setTradeMsg] = useState(null);
   const [tradeLoading, setTradeLoading] = useState(false);
   const [trades, setTrades] = useState([]);
-  const wsRef = useRef(null);
 
   const fetchTrades = useCallback(() => {
     api.get('/trade/history').then(r => setTrades(r.data)).catch(() => {});
@@ -38,51 +37,43 @@ export default function Bitcoin() {
 
   useEffect(() => {
     fetchTrades();
-    // Connect to backend WebSocket for live price.
-    // Local dev: VITE_WS_URL is unset, so it uses the current host (Vite proxy handles it) — unchanged behavior.
-    // Production: set VITE_WS_URL to your deployed backend's wss:// URL, e.g. wss://mobilis-backend.onrender.com/ws/btc-price
-    const wsUrl = import.meta.env.VITE_WS_URL || `ws://${window.location.host}/ws/btc-price`;
-    const ws = new WebSocket(wsUrl);
-    wsRef.current = ws;
 
-    ws.onmessage = (e) => {
-      const msg = JSON.parse(e.data);
-      if (msg.type === 'PRICE_UPDATE') {
-        const p = msg.data;
-        setPrice(p);
-        setPriceData(prev => {
-          const time = new Date(p.timestamp).toLocaleTimeString();
-          const next = [...prev, { time, price: p.price }];
-          return next.slice(-60); // keep last 60 data points
-        });
-      }
+    // The deployed backend (server.mjs on Vercel) does NOT expose /ws/btc-price —
+    // Vercel Functions don't reliably support broadcasting to multiple pinned WS
+    // connections, so that route was intentionally dropped in production. Instead
+    // we poll the REST endpoint /api/v1/btc-price, which does exist and is already
+    // proxied same-origin through your `api` instance (no CORS/mixed-content issues).
+    let cancelled = false;
+
+    const fetchPrice = () => {
+      api.get('/v1/btc-price')
+        .then(r => {
+          if (cancelled) return;
+          const d = r.data;
+          const p = {
+            price: parseFloat(d.price ?? d.lastPrice),
+            change: parseFloat(d.change ?? d.priceChangePercent ?? 0),
+            high: parseFloat(d.high ?? d.highPrice ?? 0),
+            low: parseFloat(d.low ?? d.lowPrice ?? 0),
+            volume: parseFloat(d.volume ?? 0),
+            timestamp: Date.now()
+          };
+          setPrice(p);
+          setPriceData(prev => {
+            const time = new Date().toLocaleTimeString();
+            return [...prev, { time, price: p.price }].slice(-60);
+          });
+        })
+        .catch(() => {});
     };
 
-    ws.onerror = () => {
-      // Fallback: poll Binance directly if WS backend unavailable
-      const poll = setInterval(() => {
-        fetch('https://api.binance.com/api/v3/ticker/24hr?symbol=BTCUSDT')
-          .then(r => r.json())
-          .then(d => {
-            const p = {
-              price: parseFloat(d.lastPrice),
-              change: parseFloat(d.priceChangePercent),
-              high: parseFloat(d.highPrice),
-              low: parseFloat(d.lowPrice),
-              volume: parseFloat(d.volume),
-              timestamp: Date.now()
-            };
-            setPrice(p);
-            setPriceData(prev => {
-              const time = new Date().toLocaleTimeString();
-              return [...prev, { time, price: p.price }].slice(-60);
-            });
-          }).catch(() => {});
-      }, 3000);
-      return () => clearInterval(poll);
-    };
+    fetchPrice();
+    const pollInterval = setInterval(fetchPrice, 3000);
 
-    return () => ws.close();
+    return () => {
+      cancelled = true;
+      clearInterval(pollInterval);
+    };
   }, [fetchTrades]);
 
   const handleTrade = async (e) => {
