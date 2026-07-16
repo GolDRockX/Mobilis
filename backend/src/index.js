@@ -9,6 +9,7 @@ import adminRoutes from './routes/admin.js';
 import tradeRoutes from './routes/trade.js';
 import apiKeyRoutes from './routes/apiKeys.js';
 import externalApiRoutes from './routes/externalApi.js';
+import simRoutes from './routes/sim.js';
 
 dotenv.config();
 
@@ -134,6 +135,7 @@ app.use('/api/keys', apiKeyRoutes);
 
 // External API routes (API key auth)
 app.use('/api/v1', externalApiRoutes);
+app.use('/api/sim', simRoutes);
 
 // Health check
 app.get('/api/health', (req, res) => res.json({ status: 'ok', timestamp: new Date() }));

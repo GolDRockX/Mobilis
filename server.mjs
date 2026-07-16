@@ -20,6 +20,7 @@ import adminRoutes from './backend/src/routes/admin.js';
 import tradeRoutes from './backend/src/routes/trade.js';
 import apiKeyRoutes from './backend/src/routes/apiKeys.js';
 import externalApiRoutes from './backend/src/routes/externalApi.js';
+import simRoutes from './backend/src/routes/sim.js';
 
 dotenv.config();
 
@@ -51,6 +52,7 @@ app.use('/api/admin', adminRoutes);
 app.use('/api/trade', tradeRoutes);
 app.use('/api/keys', apiKeyRoutes);
 app.use('/api/v1', externalApiRoutes);
+app.use('/api/sim', simRoutes);
 
 app.get('/api/health', (req, res) => res.json({ status: 'ok', timestamp: new Date() }));
 

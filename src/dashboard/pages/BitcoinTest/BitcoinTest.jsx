@@ -6,7 +6,6 @@ import {
   ReferenceLine
 } from 'recharts';
 import { TrendingUp, TrendingDown, FlaskConical, RotateCcw, DollarSign, Image, Droplet, Vote, Package, UserCheck } from 'lucide-react';
-import { useBlockchain } from '../../blockchain/useBlockchain';
 import NFTTab from '../../blockchain/components/NFTTab';
 import DeFiTab from '../../blockchain/components/DeFiTab';
 import DAOTab from '../../blockchain/components/DAOTab';
@@ -40,7 +39,6 @@ const CustomTooltip = ({ active, payload }) => {
 export default function BitcoinTest() {
   const { onMenuToggle } = useOutletContext();
   const [activeTab, setActiveTab] = useState('trading');
-  const chain = useBlockchain();
 
   // Simulated wallet state (in memory only)
   const [simUsd, setSimUsd] = useState(STARTING_USD);
@@ -139,11 +137,11 @@ export default function BitcoinTest() {
           ))}
         </div>
 
-        {activeTab === 'nft' && <NFTTab chain={chain} />}
-        {activeTab === 'defi' && <DeFiTab chain={chain} />}
-        {activeTab === 'dao' && <DAOTab chain={chain} />}
-        {activeTab === 'supplychain' && <SupplyChainTab chain={chain} />}
-        {activeTab === 'identity' && <IdentityTab chain={chain} />}
+        {activeTab === 'nft' && <NFTTab />}
+        {activeTab === 'defi' && <DeFiTab />}
+        {activeTab === 'dao' && <DAOTab />}
+        {activeTab === 'supplychain' && <SupplyChainTab />}
+        {activeTab === 'identity' && <IdentityTab />}
 
         {activeTab === 'trading' && (
         <>
