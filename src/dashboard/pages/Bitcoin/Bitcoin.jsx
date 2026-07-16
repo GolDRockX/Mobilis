@@ -1,4 +1,4 @@
-import { useEffect, useState, useCallback } from 'react';
+import { useEffect, useState, useRef, useCallback } from 'react';
 import { useAuth } from '../../context/AuthContext';
 import Header from '../../components/Header/Header';
 import { useOutletContext } from 'react-router-dom';
@@ -30,6 +30,7 @@ export default function Bitcoin() {
   const [tradeMsg, setTradeMsg] = useState(null);
   const [tradeLoading, setTradeLoading] = useState(false);
   const [trades, setTrades] = useState([]);
+  const wsRef = useRef(null);
 
   const fetchTrades = useCallback(() => {
     api.get('/trade/history').then(r => setTrades(r.data)).catch(() => {});
@@ -37,43 +38,64 @@ export default function Bitcoin() {
 
   useEffect(() => {
     fetchTrades();
+    // Connect to backend WebSocket for live price.
+    // Local dev: VITE_WS_URL is unset, so it uses the current host (Vite proxy handles it) — unchanged behavior.
+    // Production: set VITE_WS_URL to your deployed backend's wss:// URL if you have one.
+    // Browsers block insecure ws:// connections from https:// pages entirely (throws
+    // synchronously, not just a connection error), so we must match the page's own
+    // protocol here — wss:// when the page is https://, ws:// otherwise.
+    const wsProtocol = window.location.protocol === 'https:' ? 'wss:' : 'ws:';
+    const wsUrl = import.meta.env.VITE_WS_URL || `${wsProtocol}//${window.location.host}/ws/btc-price`;
 
-    // The deployed backend (server.mjs on Vercel) does NOT expose /ws/btc-price —
-    // Vercel Functions don't reliably support broadcasting to multiple pinned WS
-    // connections, so that route was intentionally dropped in production. Instead
-    // we poll the REST endpoint /api/v1/btc-price, which does exist and is already
-    // proxied same-origin through your `api` instance (no CORS/mixed-content issues).
-    let cancelled = false;
-
-    const fetchPrice = () => {
-      api.get('/v1/btc-price')
-        .then(r => {
-          if (cancelled) return;
-          const d = r.data;
-          const p = {
-            price: parseFloat(d.price ?? d.lastPrice),
-            change: parseFloat(d.change ?? d.priceChangePercent ?? 0),
-            high: parseFloat(d.high ?? d.highPrice ?? 0),
-            low: parseFloat(d.low ?? d.lowPrice ?? 0),
-            volume: parseFloat(d.volume ?? 0),
-            timestamp: Date.now()
-          };
-          setPrice(p);
-          setPriceData(prev => {
-            const time = new Date().toLocaleTimeString();
-            return [...prev, { time, price: p.price }].slice(-60);
-          });
-        })
-        .catch(() => {});
+    const startPolling = () => {
+      const poll = setInterval(() => {
+        fetch('https://api.binance.com/api/v3/ticker/24hr?symbol=BTCUSDT')
+          .then(r => r.json())
+          .then(d => {
+            const p = {
+              price: parseFloat(d.lastPrice),
+              change: parseFloat(d.priceChangePercent),
+              high: parseFloat(d.highPrice),
+              low: parseFloat(d.lowPrice),
+              volume: parseFloat(d.volume),
+              timestamp: Date.now()
+            };
+            setPrice(p);
+            setPriceData(prev => {
+              const time = new Date().toLocaleTimeString();
+              return [...prev, { time, price: p.price }].slice(-60);
+            });
+          }).catch(() => {});
+      }, 10000);
+      return () => clearInterval(poll);
     };
 
-    fetchPrice();
-    const pollInterval = setInterval(fetchPrice, 3000);
+    let ws;
+    try {
+      ws = new WebSocket(wsUrl);
+      wsRef.current = ws;
+    } catch {
+      // Construction itself can throw synchronously (e.g. insecure ws:// from
+      // an https:// page) — fall straight to polling if so.
+      return startPolling();
+    }
 
-    return () => {
-      cancelled = true;
-      clearInterval(pollInterval);
+    ws.onmessage = (e) => {
+      const msg = JSON.parse(e.data);
+      if (msg.type === 'PRICE_UPDATE') {
+        const p = msg.data;
+        setPrice(p);
+        setPriceData(prev => {
+          const time = new Date(p.timestamp).toLocaleTimeString();
+          const next = [...prev, { time, price: p.price }];
+          return next.slice(-60); // keep last 60 data points
+        });
+      }
     };
+
+    ws.onerror = () => startPolling();
+
+    return () => { ws?.close(); };
   }, [fetchTrades]);
 
   const handleTrade = async (e) => {
